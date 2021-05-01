@@ -24,4 +24,23 @@ public class RacingCars {
         }
         return racingCars;
     }
+
+    public RacingResults race(DriveValueGenerator numberGenerator) {
+        drive(numberGenerator);
+        return getRacingResults();
+    }
+
+    private void drive(DriveValueGenerator numberGenerator) {
+        for (RacingCar racingCar : racingCars) {
+            racingCar.drive(numberGenerator.generate());
+        }
+    }
+
+    private RacingResults getRacingResults() {
+        List<RacingCarInfo> racingCarInfos = new ArrayList<>();
+        for (RacingCar racingCar : racingCars) {
+            racingCarInfos.add(new RacingCarInfo(racingCar.getCarName(), racingCar.getDistance()));
+        }
+        return new RacingResults(racingCarInfos);
+    }
 }

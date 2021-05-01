@@ -33,6 +33,10 @@ class RacingCar {
         }
     }
 
+    public String getCarName() {
+        return carName;
+    }
+
     public int getDistance() {
         return distance.getValue();
     }
