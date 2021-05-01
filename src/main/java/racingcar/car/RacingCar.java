@@ -29,7 +29,7 @@ public class RacingCar {
 
     public void drive(int value) {
         if (value >= MIN_DRIVE_CONDITION) {
-            this.distance.addOne();
+            this.distance.addUnit();
         }
     }
 

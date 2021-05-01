@@ -9,7 +9,7 @@ class Distance {
         this.value = 0;
     }
 
-    public void addOne() {
+    public void addUnit() {
         value += DISTANCE_UNIT;
     }
 
