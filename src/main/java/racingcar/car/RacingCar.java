@@ -2,7 +2,7 @@ package racingcar.car;
 
 import java.util.Objects;
 
-public class RacingCar {
+class RacingCar {
     public static final int MIN_NAME_LENGTH = 1;
     public static final int MAX_NAME_LENGTH = 5;
     public static final int MIN_DRIVE_CONDITION = 4;
