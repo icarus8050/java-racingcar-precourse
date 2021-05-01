@@ -1,5 +1,7 @@
 package racingcar.car;
 
+import racingcar.util.DriveValueGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

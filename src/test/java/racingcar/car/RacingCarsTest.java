@@ -2,6 +2,8 @@ package racingcar.car;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.util.DriveValueGenerator;
+import racingcar.util.SequentialDriveValueGenerator;
 
 import java.util.Arrays;
 import java.util.List;

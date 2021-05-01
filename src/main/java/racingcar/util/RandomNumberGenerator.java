@@ -2,9 +2,9 @@ package racingcar.util;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class RandomNumberGenerator {
+public class RandomNumberGenerator implements DriveValueGenerator {
 
-    public static int generate() {
+    public int generate() {
         return ThreadLocalRandom.current().nextInt(9) + 1;
     }
 }

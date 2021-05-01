@@ -10,7 +10,8 @@ public class RandomNumberGeneratorTest {
     @Test
     @DisplayName("0이상 9이하의 랜덤 숫자 생성")
     void generateTest() {
-        int generate = RandomNumberGenerator.generate();
+        DriveValueGenerator driveValueGenerator = new RandomNumberGenerator();
+        int generate = driveValueGenerator.generate();
         assertThat(generate).isGreaterThanOrEqualTo(0).isLessThanOrEqualTo(9);
     }
 }

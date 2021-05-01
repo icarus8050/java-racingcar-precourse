@@ -1,4 +1,4 @@
-package racingcar.car;
+package racingcar.util;
 
 public class SequentialDriveValueGenerator implements DriveValueGenerator {
 
