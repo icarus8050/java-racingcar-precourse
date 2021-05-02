@@ -8,7 +8,8 @@ import racingcar.util.SequentialDriveValueGenerator;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static java.util.stream.Collectors.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RacingCarsTest {
 
@@ -23,9 +24,8 @@ public class RacingCarsTest {
     @DisplayName("자동차 경주 진행 테스트")
     void racingTest() {
         //given
-        int testIdx = 0;
         int[] sequenceNumbers = {0, 3, 4, 9};
-        int[] expectedDistance = {0, 0, 1, 1};
+        List<Integer> expectedDistance = Arrays.asList(0, 0, 1, 1);
         DriveValueGenerator driveValueGenerator = new SequentialDriveValueGenerator(sequenceNumbers);
         List<String> carNames = Arrays.asList("a", "b", "c", "d");
         RacingCars racingCars = RacingCars.of(carNames);
@@ -34,11 +34,11 @@ public class RacingCarsTest {
         RacingResults racingResults = racingCars.race(driveValueGenerator);
 
         //then
-        while (racingResults.hasNextResult()) {
-            RacingCarInfo racingCarInfo = racingResults.nextResult();
-            assertThat(racingCarInfo.getCarName()).isEqualTo(carNames.get(testIdx));
-            assertThat(racingCarInfo.getDistance()).isEqualTo(expectedDistance[testIdx]);
-            testIdx++;
-        }
+        List<RacingCarInfo> racingCarInfos = racingResults.getRacingCarInfos();
+        List<Integer> actual = racingCarInfos.stream()
+                .map(RacingCarInfo::getDistance)
+                .collect(toList());
+
+        assertIterableEquals(expectedDistance, actual);
     }
 }
