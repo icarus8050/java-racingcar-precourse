@@ -31,10 +31,10 @@ public class RacingCarsTest {
         RacingCars racingCars = RacingCars.of(carNames);
 
         //when
-        RacingResults racingResults = racingCars.race(driveValueGenerator);
+        RacingResult racingResult = racingCars.race(driveValueGenerator);
 
         //then
-        List<RacingCarInfo> racingCarInfos = racingResults.getRacingCarInfos();
+        List<RacingCarInfo> racingCarInfos = racingResult.getRacingCarInfos();
         List<Integer> actual = racingCarInfos.stream()
                 .map(RacingCarInfo::getDistance)
                 .collect(toList());

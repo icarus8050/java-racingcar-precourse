@@ -11,40 +11,37 @@ import static org.assertj.core.api.Assertions.assertThat;
 class RacingResultsTest {
 
     @Test
-    @DisplayName("단독 우승한 차량 선출 테스트")
-    void electWinningCarTest() {
-        List<RacingCarInfo> participants = Arrays.asList(
-                new RacingCarInfo("a", 5),
-                new RacingCarInfo("b", 1),
-                new RacingCarInfo("c", 6),
-                new RacingCarInfo("d", 5)
-        );
-        RacingResults racingResults = new RacingResults(participants);
-        RacingResults.WinningCars winningCars = racingResults.electWinningCars();
-
-        List<RacingCarInfo> racingCarInfos = winningCars.getWinningCars();
-        for (RacingCarInfo racingCarInfo : racingCarInfos) {
-            assertThat(racingCarInfo.getCarName()).isEqualTo("c");
-            assertThat(racingCarInfo.getDistance()).isEqualTo(6);
-        }
-    }
-
-    @Test
-    @DisplayName("공동 우승한 차량 선출 테스트")
+    @DisplayName("우승 결과는 가장 마지막 결과를 가지고 선출한다")
     void electWinningCarsTest() {
-        List<RacingCarInfo> participants = Arrays.asList(
-                new RacingCarInfo("a", 6),
+        //given
+        List<String> expected = Arrays.asList("a", "c");
+        List<RacingCarInfo> firstRacingCarInfos = Arrays.asList(
+                new RacingCarInfo("a", 1),
                 new RacingCarInfo("b", 1),
-                new RacingCarInfo("c", 6),
-                new RacingCarInfo("d", 5)
+                new RacingCarInfo("c", 1),
+                new RacingCarInfo("d", 1)
         );
-        RacingResults racingResults = new RacingResults(participants);
-        RacingResults.WinningCars winningCars = racingResults.electWinningCars();
+        List<RacingCarInfo> secondRacingCarInfos = Arrays.asList(
+                new RacingCarInfo("a", 5),
+                new RacingCarInfo("b", 2),
+                new RacingCarInfo("c", 5),
+                new RacingCarInfo("d", 4)
+        );
+        RacingResult firstRacingResult = new RacingResult(firstRacingCarInfos);
+        RacingResult secondRacingResult = new RacingResult(secondRacingCarInfos);
 
-        List<RacingCarInfo> racingCarInfos = winningCars.getWinningCars();
-        for (RacingCarInfo racingCarInfo : racingCarInfos) {
-            assertThat(racingCarInfo.getCarName()).isIn("a", "c");
-            assertThat(racingCarInfo.getDistance()).isEqualTo(6);
+        RacingResults racingResults = new RacingResults(Arrays.asList(
+                firstRacingResult,
+                secondRacingResult)
+        );
+
+        //when
+        WinningCars winningCars = racingResults.electWinningCars();
+
+        //then
+        List<RacingCarInfo> winningRacingCars = winningCars.getRacingCarInfos();
+        for (RacingCarInfo winningRacingCar : winningRacingCars) {
+            assertThat(winningRacingCar.getCarName()).isIn("a", "c");
         }
     }
 }

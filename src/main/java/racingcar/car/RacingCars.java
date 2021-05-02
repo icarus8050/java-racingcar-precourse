@@ -27,7 +27,7 @@ public class RacingCars {
         return racingCars;
     }
 
-    public RacingResults race(DriveValueGenerator numberGenerator) {
+    public RacingResult race(DriveValueGenerator numberGenerator) {
         drive(numberGenerator);
         return getRacingResults();
     }
@@ -38,11 +38,11 @@ public class RacingCars {
         }
     }
 
-    private RacingResults getRacingResults() {
+    private RacingResult getRacingResults() {
         List<RacingCarInfo> racingCarInfos = new ArrayList<>();
         for (RacingCar racingCar : racingCars) {
             racingCarInfos.add(new RacingCarInfo(racingCar.getCarName(), racingCar.getDistance()));
         }
-        return new RacingResults(racingCarInfos);
+        return new RacingResult(racingCarInfos);
     }
 }
